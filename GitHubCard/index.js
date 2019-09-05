@@ -2,17 +2,18 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios.get('https://api.github.com/users/nathanmelby')
-  .then(response => {
-    console.log(response);
-  });
+// axios.get('https://api.github.com/users/nathanmelby')
+//   .then(response => {
+//     console.log(response); 
+//     response.data.map(arrayItem => {
+//     const newPerson = createCard(arrayItem);
+//     cards.appendChild(newPerson);
+//     });
+// });
   // .catch(error => {
   //   console.log('The data was not returned', error)
   // });
-  // response.data.message.forEach(item => {
-  //   const newDog = dogCard(item);
-  //   entryPoint.appendChild(newDog);
-// });
+ 
 
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
@@ -35,8 +36,28 @@ axios.get('https://api.github.com/users/nathanmelby')
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+   // const newGitHubFollowers = data.map((arrayItem) => {
+    //   const newFollowers = createCard(arrayItem.avatar_url, arrayItem.name, arrayItem.login, arrayItem.location, 
+    //     arrayItem.html_url, arrayItem.followers, arrayItem.following, arrayItem.bio);
+        
+    //     return newFollowers;
+    // })
+    
+    // newGitHubFollowers.forEach(component => {
+    //   cardsEntry.appendChild(component);
+    // }) 
 
-const followersArray = [];
+
+const followersArray = [
+  // login	"Wais-A"
+  // avatar_url	"https://avatars2.githubusercontent.com/u/12667453?v=4"
+  //  url	"https://api.github.com/users/Wais-A"
+  // html_url	"https://github.com/Wais-A"
+  // followers_url	"https://api.github.com/users/Wais-A/followers"
+  // following_url	"https://api.github.com/users/Wais-A/following{/other_user}"
+
+
+];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -58,17 +79,34 @@ const followersArray = [];
 
 */
 
-function createCard(avatarURL, name, login, location, url, followersUrl, following, bio) {
+
+
+const cardsEntry = document.querySelector('.cards');
+
+axios.get('https://api.github.com/users/nathanmelby')
+
+  .then(response => {
+    console.log(response.data);
+ 
+
+    cardsEntry.appendChild(createCard(response.data));
+  
+});
+
+// .catch(error => error);
+
+function createCard(data) {
   const newCard = document.createElement('div');
   const newImage = document.createElement('img');
-  const newCardInfo = document.createElement9('div');
+  const newCardInfo = document.createElement('div');
   const newName = document.createElement('h3');
   const newUserName = document.createElement('p');
   const newLocation = document.createElement('p');
-  const newProfileLink = document.createElement('p');
+  const newProfile = document.createElement('p');
+  const newProfileLink = document.createElement('a');
   const newFollowers = document.createElement('p');
   const newFollowing = document.createElement('p');
-  const newBio = document.createElemenet('p');
+  const newBio = document.createElement('p');
 
 
   //setup structure of elements
@@ -77,7 +115,8 @@ function createCard(avatarURL, name, login, location, url, followersUrl, followi
   newCardInfo.appendChild(newName);
   newCardInfo.appendChild(newUserName);
   newCardInfo.appendChild(newLocation);
-  newCardInfo.appendChild(newProfileLink);
+  newCardInfo.appendChild(newProfile);
+  newProfile.appendChild(newProfileLink);
   newCardInfo.appendChild(newFollowers);
   newCardInfo.appendChild(newFollowing);
   newCardInfo.appendChild(newBio);
@@ -90,18 +129,38 @@ function createCard(avatarURL, name, login, location, url, followersUrl, followi
   newUserName.classList.add('username');
   
   //set content
-  function createCard(avatarURL, name, login, location, url, followersUrl, following, bio) {
-  newImage.src = avatarURL;
-  newName.textContent = name
-  newUserName.textContent = login;
-  newLocation.textContent = location;
-  newProfileLink.textContent = url;
-  newFollowers.textContent = followersUrl;
-  newFollowing.textContent = following;
-  newBio.textContent = bio;
+ 
+
+
+  newImage.src = `${data.avatar_url}`;
+  newName.textContent = `${data.name}`;
+  newUserName.textContent = `${data.login}`;
+  newLocation.textContent = `Location: ${data.location}`;
+  newProfile.textContent = 'Profile: ';
+  // newProfileLink.textContent = `${data.html_url}`;
+  newProfileLink.href = `${data.html_url}`;
+
+  newFollowers.textContent = `Followers: ${data.followers}`;
+  newFollowing.textContent = `Following: ${data.following}`;
+  newBio.textContent = `Bio: ${data.bio}`;
 
   return newCard;
-}
+};
+
+
+// const newGitHubFollowers = data.map((arrayItem) => {
+//   const newFollowers = createCard(arrayItem.avatar_url, arrayItem.name, arrayItem.login, arrayItem.location, 
+//     arrayItem.html_url, arrayItem.followers, arrayItem.following, arrayItem.bio);
+    
+//     return newFollowers;
+// })
+
+// newGitHubFollowers.forEach(component => {
+//   cardsEntry.appendChild(component);
+// })
+
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
