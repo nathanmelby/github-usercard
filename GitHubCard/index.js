@@ -2,6 +2,18 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/nathanmelby')
+  .then(response => {
+    console.log(response);
+  });
+  // .catch(error => {
+  //   console.log('The data was not returned', error)
+  // });
+  // response.data.message.forEach(item => {
+  //   const newDog = dogCard(item);
+  //   entryPoint.appendChild(newDog);
+// });
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -45,6 +57,51 @@ const followersArray = [];
 </div>
 
 */
+
+function createCard(avatarURL, name, login, location, url, followersUrl, following, bio) {
+  const newCard = document.createElement('div');
+  const newImage = document.createElement('img');
+  const newCardInfo = document.createElement9('div');
+  const newName = document.createElement('h3');
+  const newUserName = document.createElement('p');
+  const newLocation = document.createElement('p');
+  const newProfileLink = document.createElement('p');
+  const newFollowers = document.createElement('p');
+  const newFollowing = document.createElement('p');
+  const newBio = document.createElemenet('p');
+
+
+  //setup structure of elements
+  newCard.appendChild(newImage);
+  newCard.appendChild(newCardInfo);
+  newCardInfo.appendChild(newName);
+  newCardInfo.appendChild(newUserName);
+  newCardInfo.appendChild(newLocation);
+  newCardInfo.appendChild(newProfileLink);
+  newCardInfo.appendChild(newFollowers);
+  newCardInfo.appendChild(newFollowing);
+  newCardInfo.appendChild(newBio);
+
+  //set class names
+
+  newCard.classList.add('card');
+  newCardInfo.classList.add('card-info');
+  newName.classList.add('name');
+  newUserName.classList.add('username');
+  
+  //set content
+  function createCard(avatarURL, name, login, location, url, followersUrl, following, bio) {
+  newImage.src = avatarURL;
+  newName.textContent = name
+  newUserName.textContent = login;
+  newLocation.textContent = location;
+  newProfileLink.textContent = url;
+  newFollowers.textContent = followersUrl;
+  newFollowing.textContent = following;
+  newBio.textContent = bio;
+
+  return newCard;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
